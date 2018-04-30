@@ -1,0 +1,96 @@
+# -*- coding: utf-8; mode: conf -*-
+# ~/.XCompose
+# This file defines custom Compose sequences for Unicode characters
+
+# Import default rules from the system Compose file:
+include "/usr/share/X11/locale/en_US.UTF-8/Compose"
+
+<dead_circumflex> <period>                  : "·"
+<Multi_key> <dead_circumflex> <period>      : "·"
+<Multi_key> <asterisk> <period>             : "•"
+
+<Multi_key> <asterisk> <space>              : "☆"
+<Multi_key> <asterisk> <asterisk>           : "★"
+
+
+<Multi_key> <less> <o>                      : "⟲"   U27F2       # ANTICLOCKWISE GAPPED CIRCLE ARROW
+<Multi_key> <greater> <o>                   : "⟳"   U27F3       # CLOCKWISE GAPPED CIRCLE ARROW
+
+<Multi_key> <dead_circumflex> <bar>         : "↑"
+<Multi_key> <bar> <dead_circumflex>         : "↑"
+<Multi_key> <bar> <v>                       : "↓"
+<Multi_key> <v> <bar>                       : "↓"
+<Multi_key> <v> <underscore>                : "⤓"
+<Multi_key> <underscore> <v>                : "⤓"
+<Multi_key> <dead_circumflex> <underscore>  : "↥"
+<Multi_key> <underscore> <dead_circumflex>  : "↥"
+
+
+<Multi_key> <v> <comma>                     : "✓"
+<Multi_key> <o> <k>                         : "✓"
+<Multi_key> <V> <comma>                     : "✔"
+<Multi_key> <O> <K>                         : "✔"
+<Multi_key> <x> <comma>                     : "✗"
+<Multi_key> <k> <o>                         : "✗"
+<Multi_key> <X> <comma>                     : "✘"
+<Multi_key> <K> <O>                         : "✘"
+
+<Multi_key> <numbersign> <space>            : "𝄽"
+<Multi_key> <numbersign> <slash> <space>    : "𝄾"
+
+<Multi_key> <p> <i>                         : "π"        U03C0                # GREEK SMALL LETTER PI
+
+<Multi_key> <s> <h> <r> <u> <g>             : "¯\\_(ツ)_/¯"
+
+<Multi_key> <a> <asterisk>                : "α"        U03B1                # GREEK SMALL LETTER ALPHA
+<Multi_key> <b> <asterisk>                : "β"        U03B2                # GREEK SMALL LETTER BETA
+<Multi_key> <c> <asterisk>                : "ξ"        U03BE                # GREEK SMALL LETTER XI
+<Multi_key> <d> <asterisk>                : "δ"        U03B4                # GREEK SMALL LETTER DELTA
+<Multi_key> <e> <asterisk>                : "ε"        U03B5                # GREEK SMALL LETTER EPSILON
+<Multi_key> <f> <asterisk>                : "φ"        U03C6                # GREEK SMALL LETTER PHI
+<Multi_key> <g> <asterisk>                : "γ"        U03B3                # GREEK SMALL LETTER GAMMA
+<Multi_key> <h> <asterisk>                : "θ"        U03B8                # GREEK SMALL LETTER THETA
+<Multi_key> <i> <asterisk>                : "ι"        U03B9                # GREEK SMALL LETTER ΙΟΤΑ
+<Multi_key> <k> <asterisk>                : "κ"        U03BA                # GREEK SMALL LETTER KAPPA
+<Multi_key> <l> <asterisk>                : "λ"        U03BB                # GREEK SMALL LETTER LAMBDA
+<Multi_key> <m> <asterisk>                : "μ"        U03BC                # GREEK SMALL LETTER MU
+<Multi_key> <n> <asterisk>                : "ν"        U03BD                # GREEK SMALL LETTER NU
+<Multi_key> <o> <asterisk>                : "ο"        U03BF                # GREEK SMALL LETTER OMICRON
+<Multi_key> <p> <asterisk>                : "π"        U03C0                # GREEK SMALL LETTER PI
+<Multi_key> <q> <asterisk>                : "ψ"        U03C8                # GREEK SMALL LETTER PSI
+<Multi_key> <r> <asterisk>                : "ρ"        U03C1                # GREEK SMALL LETTER RHO
+<Multi_key> <s> <asterisk>                : "σ"        U03C3                # GREEK SMALL LETTER SIGMA
+<Multi_key> <t> <asterisk>                : "τ"        U03C4                # GREEK SMALL LETTER TAU
+<Multi_key> <u> <asterisk>                : "υ"        U03C5                # GREEK SMALL LETTER UPSILON
+<Multi_key> <v> <asterisk>                : "ς"        U03C2                # GREEK SMALL LETTER FINAL SIGMA
+<Multi_key> <w> <asterisk>                : "ω"        U03C9                # GREEK SMALL LETTER OMEGA
+<Multi_key> <x> <asterisk>                : "χ"        U03C7                # GREEK SMALL LETTER CHI
+<Multi_key> <y> <asterisk>                : "η"        U03B7                # GREEK SMALL LETTER ΕΤΑ
+<Multi_key> <z> <asterisk>                : "ζ"        U03B6                # GREEK SMALL LETTER ZETA
+
+# Capital greek letters.
+<Multi_key> <A> <asterisk>                : "Α"        U0391                # GREEK CAPITAL LETTER ALPHA
+<Multi_key> <B> <asterisk>                : "Β"        U0392                # GREEK CAPITAL LETTER BETA
+<Multi_key> <C> <asterisk>                : "Ξ"        U039E                # GREEK CAPITAL LETTER XI
+<Multi_key> <D> <asterisk>                : "Δ"        U0394                # GREEK CAPITAL LETTER DELTA
+<Multi_key> <E> <asterisk>                : "Ε"        U0395                # GREEK CAPITAL LETTER EPSILON
+<Multi_key> <F> <asterisk>                : "Φ"        U03A6                # GREEK CAPITAL LETTER PHI
+<Multi_key> <G> <asterisk>                : "Γ"        U0393                # GREEK CAPITAL LETTER GAMMA
+<Multi_key> <H> <asterisk>                : "Θ"        U0398                # GREEK CAPITAL LETTER THETA
+<Multi_key> <I> <asterisk>                : "Ι"        U0399                # GREEK CAPITAL LETTER ΙΟΤΑ
+<Multi_key> <K> <asterisk>                : "Κ"        U039A                # GREEK CAPITAL LETTER KAPPA
+<Multi_key> <L> <asterisk>                : "Λ"        U039B                # GREEK CAPITAL LETTER LAMBDA
+<Multi_key> <M> <asterisk>                : "Μ"        U039C                # GREEK CAPITAL LETTER MU
+<Multi_key> <N> <asterisk>                : "Ν"        U039D                # GREEK CAPITAL LETTER NU
+<Multi_key> <O> <asterisk>                : "Ο"        U039F                # GREEK CAPITAL LETTER OMICRON
+<Multi_key> <P> <asterisk>                : "Π"        U03A0                # GREEK CAPITAL LETTER PI
+<Multi_key> <Q> <asterisk>                : "Ψ"        U03A8                # GREEK CAPITAL LETTER PSI
+<Multi_key> <R> <asterisk>                : "Ρ"        U03A1                # GREEK CAPITAL LETTER RHO
+<Multi_key> <S> <asterisk>                : "Σ"        U03A3                # GREEK CAPITAL LETTER SIGMA
+<Multi_key> <T> <asterisk>                : "Τ"        U03A4                # GREEK CAPITAL LETTER TAU
+<Multi_key> <U> <asterisk>                : "Υ"        U03A5                # GREEK CAPITAL LETTER UPSILON
+<Multi_key> <V> <asterisk>                : "Σ"        U03A3                # GREEK CAPITAL LETTER SIGMA
+<Multi_key> <W> <asterisk>                : "Ω"        U03A9                # GREEK CAPITAL LETTER OMEGA
+<Multi_key> <X> <asterisk>                : "Χ"        U03A7                # GREEK CAPITAL LETTER CHI
+<Multi_key> <Y> <asterisk>                : "Η"        U0397                # GREEK CAPITAL LETTER ΕΤΑ
+<Multi_key> <Z> <asterisk>                : "Ζ"        U0396                # GREEK CAPITAL LETTER ZETA
