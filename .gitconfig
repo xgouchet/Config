@@ -1,0 +1,194 @@
+# Basic
+[user]
+    name = Xavier Gouchet
+    email = xavier.gouchet@gmail.com
+    signingkey = 35B201543D41A27E2DBA7C6E7650A5084AB64CD6
+
+# Core behavior
+[core]
+    editor = nano -r 72 --softwrap
+    # convert crlf on commit, set the default end of line as lf
+    eol = lf
+    autocrlf = input
+    # handle whitespace issues
+    whitespace = blank-at-eol,blank-at-eof,
+
+    # attributesfile = ~/.gitattributes
+[help]
+    # execute the mistyped command after 50 deciseconds
+    autoCorrect = 50
+
+[push]
+    default = upstream
+[fetch]
+    prune = true
+[rebase]
+    autosquash = true
+
+# Display
+[color]
+    ui = always
+    diff = always
+[color "branch"]
+    current = green reverse
+    local = green
+    remote = yellow
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+    branch = blue
+[status]
+    showUntrackedFiles = all
+
+
+# Diff configuration
+[diff]
+    algorithm = patience
+    indentHeuristic = true
+    compactionHeuristic = true
+    tool = meld
+[diff "image"]
+    command = compare $REMOTE $LOCAL png:- | montage -geometry +4+4 $REMOTE - $LOCAL png:- | display -title "$MERGED" -
+#    command = compare $REMOTE $LOCAL png:- | display -title "$MERGED" -
+[difftool "meld"]
+    cmd = meld --diff $LOCAL $REMOTE
+
+
+# Merge configuration
+[merge]
+    tool = amt
+    conflictstyle = diff3
+[mergetool]
+    keepBackup = false
+[mergetool "meld"]
+    cmd = meld --diff $LOCAL $MERGED $REMOTE --diff $LOCAL $BASE --diff $BASE $REMOTE
+[mergetool "amt"]
+    cmd = amt -b $BASE -l $LOCAL -r $REMOTE -m $MERGED
+    trustExitCode = true
+
+
+# A list of useful aliases
+[alias]
+    # Pretty log (without graph)
+    l = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s' --abbrev-commit
+    # Pretty log (with graph)
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s' --abbrev-commit
+    # Pretty log (with graph)
+    ld = !git lg --simplify-by-decoration
+    # log and apply a grep on log messages (or authors, ...)
+    lgrep = !bash -c 'git log --color --pretty=format:\"%Cred%h%Creset - %Cgreen(%cr) %C(bold blue)<%an>%Creset %s\" --abbrev-commit ${@:2} | grep -i $1' -
+    # Short status
+    st = status --short --branch
+    # Show a (short) commit info without the diff
+    peek = show --quiet  --format='%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s'
+    # Show the first commit
+    first = "!git l --date-order --reverse | head -2"
+    # Show the diff staged for commit
+    staged = diff --staged
+    # Log only my commits
+    mine = !git l --author="$(git config user.email)"
+    # Show all the commits from last year (usefull for annual performance review)
+    last-year = !git mine --all --after "01/01/$(date --date='1 year ago' +%Y)" --before "01/01/$(date +%Y)" --no-merges
+    # Show all commits from past week
+    weekly = !git mine --all --since 1.week --date=short --no-merges
+    # Daily standup 
+    standup = !git mine --all --since yesterday --no-merges
+    # What's the Focus ?!
+    wtf = "!git status --short --branch; echo '\nThe last 3 commits were :'; git l -3"
+
+
+    # Dumb commit message
+    yolo = !git commit -m "\"$(curl -s http://whatthecommit.com/index.txt )\""
+    # Commit by patch
+    patch = commit --patch
+    # Amend last commit
+    amend = commit --amend
+    # Amend last commit without prompting for a message update
+    comend = commit --amend --no-edit
+    # Sign the last commit (resetting the author)
+    sign = commit -S --amend --no-edit --reset-author
+    # Steal the credit for a commit
+    steal = commit --amend --reset-author --no-edit
+    # Create a snapshot of the current modifications
+    snapshot = !git stash save "snapshot: $(date)" &&  git stash apply "stash@{0}"
+    # Create a commit that fixes another one, and auto-squash it now
+    fixup = commit --fixup 
+
+    # delete all branches merged in the current branch
+    delete-merged-branches = "!git branch --no-color --merged | egrep -v '(^\\*|master|dev)' | xargs -I{} git branch -d {}"
+    dmb = "!git delete-merged-branches"
+
+    # Pull the upstream branch, rebasing any local change
+    update = "!git pull --rebase --prune && git delete-merged-branches && git l HEAD@{1}.."
+    # Synchronize with the remote repository
+    sync = "!git update && git push"
+    # Push without democracy
+    art-49-3 = push --force
+    # Push force with lease
+    please = push --force-with-lease
+
+    # Init a folder with an empty initial commit
+    it = !git init && git commit --allow-empty
+    # Add a file to the gitignore file
+    ignore = "!([ ! -e .gitignore ] && touch .gitignore) | echo $1 >>.gitignore"
+
+    # List commiters, sorted by number of commits
+    who = shortlog -sne --
+    # Show the commit where a file was added
+    when = "!git l --follow --diff-filter=A --find-renames=40% --"
+    # prints the origin remote url
+    cloneurl = config --get remote.origin.url
+    # from http://serverfault.com/questions/175052/how-to-tell-which-local-branch-is-tracking-which-remote-branch-in-git
+    # display the name of the upstream branch
+    upstream = rev-parse --symbolic-full-name --abbrev-ref HEAD@{upstream}
+    # list dangling commits
+    lost = "!git fsck | awk '/dangling commit/ {print $3}' | git peek --stdin"
+
+    # shortcuts for custom merges
+    mergemeld = mergetool --tool=meld
+    mergeamt = mergetool --tool=amt
+
+    # To err is human, but a real disaster needs a git client
+    unadd = rm --cached
+    unstage = reset --mixed
+    unchange = reset --hard -- .
+    uncommit = reset --soft HEAD^
+    rollback = reset --hard HEAD^
+
+    # Shamelessly copied from https://medium.com/@flushentitypack/git-related-d1cd98aa338c#.rl1hez747
+    # Usage: git related path/to/file.ext
+    related = !sh -c 'git log --follow --format=format:%H $1 | xargs -L1 git diff-tree --no-commit-id --name-only -r | sort | uniq -c | sort -b -n -r ' -
+
+    # Shamelessly copied from https://toucantoco.com/please-have-fun-with-git-aliases
+    treesmas = log --graph --abbrev-commit --decorate --all --format=format:'%C(bold blue)%h%C(reset) - %C(cyan)%aD%C(reset) - %an %C(blue)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(green)%s%C(reset)'
+
+    # Shamelessly copied from https://stackoverflow.com/questions/1384325/in-git-is-there-a-simple-way-of-introducing-an-unrelated-branch-to-a-repository
+    new-root = "!f() { git checkout --orphan $1; git rm -rf .; touch README.md; git add README.md; git commit 'Init $1'; }; f"
+
+    # give the hash of the first child of the current commit
+    child = "!bash -c 'git log --format=%H --reverse --ancestry-path HEAD..$1 | head -1' -"
+    # Checkout the next commit towards the given ref
+    next = "!bash -c 'git checkout $(git child $1)' -"
+    # Checkout the parent commit
+    previous = checkout HEAD^
+
+    # I have sexdaily... dislexia... damn
+    cehcout = checkout
+    cmomit = commit
+
+# AutomaticMergeTool
+[amt]
+    tools = java_imports;gen_simplify;gen_additions;gen_deletions;gen_woven;gen_debug;meld
+    verbose = true
+    keepReport = false
+
+[mergetool "amt"]
+    cmd = amt -b "$BASE" -l "$LOCAL" -r "$REMOTE" -m "$MERGED"
+
+[mergetool "gen_additions"]
+    whitespace =
+    order = ask
+
+[mergetool "gen_debug"]
+    report = unsolved
