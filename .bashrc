@@ -47,3 +47,5 @@ do
   source "$file"
 done
 
+
+export PATH=/home/xgouchet/.local/bin:$PATH

@@ -34,7 +34,7 @@ GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWCOLORHINTS=true
 GIT_PS1_HIDE_IF_PWD_IGNORED=true
-GIT_PS1_SHOWUPSTREAM='legacy'
+GIT_PS1_SHOWUPSTREAM='verbose git'
 GIT_PS1_STATESEPARATOR=' '
 
 # pretty_git_ps1=`__git_ps1`
@@ -44,8 +44,14 @@ pretty_git_ps1() {
         sed 's/>/∆/'    | # upstream behind
         sed 's/[$]/Σ/'  | # sigma = stash available
         sed 's/*/δ/'    | # delta = dirty files
-        sed 's/%/α/'    | # alpha = untracked files
-        sed 's/(/⫯ /'   |  # prefix
+        sed 's/%/υ/'    | # upsilon = untracked files
+        sed 's/+/ι/'    | # iota = indexed files
+        sed 's/#/·/'    | # pound = orphan branch
+        sed 's/=/✓/'    | # upstream identical to local
+        sed 's/ uι/ +/' | # upstream change count
+        sed 's/ u/ /'   | # upstream info
+        sed 's/#/·/'    | # pound = orphan branch
+        sed 's/(/⫯ /'   | # prefix
         sed 's/)//'
 }
 

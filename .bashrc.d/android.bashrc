@@ -6,6 +6,18 @@ export PATH=${PATH}:$ANDROID_SDK/tools
 export PATH=${PATH}:$ANDROID_SDK/tools/bin
 export PATH=${PATH}:$ANDROID_SDK/platform-tools
 
+export SERIAL_HONOR9=7BKDU17727001808
+export SERIAL_GEAR=R3AF600DQLK
+
+function adb_set_serial() {
+    export ANDROID_SERIAL=$1
+}
+
+function adb_reset_serial() {
+    unset ANDROID_SERIAL
+}
+
+
 # Usage : adb_clear_storage com.package.name
 function adb_clear_storage () {
     adb shell pm clear $1
@@ -70,4 +82,17 @@ function adb_println() {
 # Usage : adb_am_view url [adb flags]
 function adb_am_view() {
     adb shell am start -a "android.intent.action.VIEW" -d "$@"
+}
+
+
+function adb_now() {
+    # "MMDDhhmm[[CC]YY][.ss]"
+    now=$(date +%m%d%H%M%Y.%S)
+    adb shell "date $now ; am broadcast -a android.intent.action.TIME_SET"
+}
+
+function adb_tomorrow() {
+    # "MMDDhhmm[[CC]YY][.ss]"
+    tomorrow=$(date --date="-1 days ago" +%m%d%H%M%Y.%S)
+    adb shell "date $tomorrow ; am broadcast -a android.intent.action.TIME_SET"
 }

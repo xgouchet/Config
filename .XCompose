@@ -12,6 +12,8 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <asterisk> <space>              : "☆"
 <Multi_key> <asterisk> <asterisk>           : "★"
 
+<Multi_key> <bar> <period>                  : "⋮"
+
 
 <Multi_key> <less> <o>                      : "⟲"   U27F2       # ANTICLOCKWISE GAPPED CIRCLE ARROW
 <Multi_key> <greater> <o>                   : "⟳"   U27F3       # CLOCKWISE GAPPED CIRCLE ARROW

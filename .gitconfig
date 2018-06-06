@@ -64,8 +64,13 @@
 [mergetool "meld"]
     cmd = meld --diff $LOCAL $MERGED $REMOTE --diff $LOCAL $BASE --diff $BASE $REMOTE
 [mergetool "amt"]
-    cmd = amt -b $BASE -l $LOCAL -r $REMOTE -m $MERGED
+    cmd = amt -b "$BASE" -l "$LOCAL" -r "$REMOTE" -m "$MERGED"
     trustExitCode = true
+[mergetool "gen_additions"]
+    whitespace =
+    order = ask
+[mergetool "gen_debug"]
+    report = unsolved
 
 
 # A list of useful aliases
@@ -73,7 +78,7 @@
     # Pretty log (without graph)
     l = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s' --abbrev-commit
     # Pretty log (with graph)
-    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s' --abbrev-commit
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen%cr (%cd) %C(bold blue)<%an>%Creset\n        %G?  %s' --abbrev-commit --date=format:'%Y-%m-%d'
     # Pretty log (with graph)
     ld = !git lg --simplify-by-decoration
     # log and apply a grep on log messages (or authors, ...)
@@ -95,8 +100,9 @@
     # Daily standup 
     standup = !git mine --all --since yesterday --no-merges
     # What's the Focus ?!
-    wtf = "!git status --short --branch; echo '\nThe last 3 commits were :'; git l -3"
-
+    wtf = "!git status --short --branch; echo '\nThe last 3 commits were :'; git l -5 --graph"
+    # Find all jira tasks merged
+    jira = !bash -c 'git log --pretty=format:\"%s\" ${@:2} | grep -o \"$1-[0-9]*\" ' -
 
     # Dumb commit message
     yolo = !git commit -m "\"$(curl -s http://whatthecommit.com/index.txt )\""
@@ -120,7 +126,7 @@
     dmb = "!git delete-merged-branches"
 
     # Pull the upstream branch, rebasing any local change
-    update = "!git pull --rebase --prune && git delete-merged-branches && git l HEAD@{1}.."
+    update = "!git pull --rebase --prune && git delete-merged-branches && git lg HEAD@{1}.."
     # Synchronize with the remote repository
     sync = "!git update && git push"
     # Push without democracy
@@ -183,12 +189,3 @@
     verbose = true
     keepReport = false
 
-[mergetool "amt"]
-    cmd = amt -b "$BASE" -l "$LOCAL" -r "$REMOTE" -m "$MERGED"
-
-[mergetool "gen_additions"]
-    whitespace =
-    order = ask
-
-[mergetool "gen_debug"]
-    report = unsolved
