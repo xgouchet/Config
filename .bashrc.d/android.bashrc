@@ -8,6 +8,7 @@ export PATH=${PATH}:$ANDROID_SDK/platform-tools
 
 export SERIAL_HONOR9=7BKDU17727001808
 export SERIAL_GEAR=R3AF600DQLK
+export SERIAL_NEXUS7=0a608ee4
 
 function adb_set_serial() {
     export ANDROID_SERIAL=$1
@@ -85,14 +86,7 @@ function adb_am_view() {
 }
 
 
-function adb_now() {
-    # "MMDDhhmm[[CC]YY][.ss]"
-    now=$(date +%m%d%H%M%Y.%S)
-    adb shell "date $now ; am broadcast -a android.intent.action.TIME_SET"
-}
-
-function adb_tomorrow() {
-    # "MMDDhhmm[[CC]YY][.ss]"
-    tomorrow=$(date --date="-1 days ago" +%m%d%H%M%Y.%S)
-    adb shell "date $tomorrow ; am broadcast -a android.intent.action.TIME_SET"
+# Usage : adb_grant_permission packagename permission
+function adb_grant_permission() {
+    adb shell pm grant $1 $2
 }

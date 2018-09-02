@@ -25,6 +25,10 @@ blockquote,dl,ol,p,pre,table,ul {
   padding: 0;
 }
 
+body p {
+  text-align: justify;
+}
+
 body a {
   color: #4183c4;
   text-decoration: none;
@@ -649,31 +653,3 @@ body .task-list{
   background-color:#EAF2F5
 }
 
-.type-csharp .highlight .k{
-  color:#0000FF
-}
-
-.type-csharp .highlight .kt{
-  color:#0000FF
-}
-
-.type-csharp .highlight .nf{
-  color:#000000;
-  font-weight:normal
-}
-
-.type-csharp .highlight .nc{
-  color:#2B91AF
-}
-
-.type-csharp .highlight .nn{
-  color:#000000
-}
-
-.type-csharp .highlight .s{
-  color:#A31515
-}
-
-.type-csharp .highlight .sc{
-  color:#A31515
-}

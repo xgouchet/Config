@@ -22,3 +22,5 @@ alias gw='./gradlew'
 
 export EDITOR="nano"
 setxkbmap -option "nbsp:none"
+
+alias langtool-fr='java -jar /opt/LanguageTool-4.2/languagetool-commandline.jar -l fr'

@@ -185,7 +185,7 @@
 
 # AutomaticMergeTool
 [amt]
-    tools = java_imports;gen_simplify;gen_additions;gen_deletions;gen_woven;gen_debug;meld
+    tools = java_imports;kotlin_imports_beta;gen_simplify;gen_additions;gen_deletions;gen_woven;meld
     verbose = true
     keepReport = false
 
