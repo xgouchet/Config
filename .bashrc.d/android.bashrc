@@ -18,7 +18,6 @@ function adb_reset_serial() {
     unset ANDROID_SERIAL
 }
 
-
 # Usage : adb_clear_storage com.package.name
 function adb_clear_storage () {
     adb shell pm clear $1
@@ -89,4 +88,62 @@ function adb_am_view() {
 # Usage : adb_grant_permission packagename permission
 function adb_grant_permission() {
     adb shell pm grant $1 $2
+}
+
+function adb_show_app_info() {
+    adb shell am start -a "android.settings.APPLICATION_DETAILS_SETTINGS" -d "package:$@"
+}
+
+# usage export_svg source.svg output.png sizedp
+function export_svg() {
+
+    mkdir -p "drawable-ldpi"
+    size=$(($3 * 3 / 4))
+    inkscape -z -e "drawable-ldpi/$2" -w $size -h $size "$1"
+    mkdir -p "drawable-mdpi"
+    size=$(($3))
+    inkscape -z -e "drawable-mdpi/$2" -w $size -h $size "$1"
+    mkdir -p "drawable-hdpi"
+    size=$(($3 * 3 / 2))
+    inkscape -z -e "drawable-hdpi/$2" -w $size -h $size "$1"
+    mkdir -p "drawable-xhdpi"
+    size=$(($3 * 2))
+    inkscape -z -e "drawable-xhdpi/$2" -w $size -h $size "$1"
+    mkdir -p "drawable-xxhdpi"
+    size=$(($3 * 3))
+    inkscape -z -e "drawable-xxhdpi/$2" -w $size -h $size "$1"
+    mkdir -p "drawable-xxxhdpi"
+    size=$(($3 * 4))
+    inkscape -z -e "drawable-xxxhdpi/$2" -w $size -h $size "$1"
+}
+
+# usage adb_tap fullresource_id
+# eg : adb_tap com.sample.app:id/button 
+function adb_tap() {
+    adb pull $(adb shell uiautomator dump | grep -oP '[^ ]+.xml') /tmp/view.xml
+    bounds=$(xmlstarlet sel -t -v "//*/node[@resource-id='$1']/@bounds" /tmp/view.xml)
+    echo $bounds | grep -o "[0-9]*" > /tmp/bounds
+
+    if [ -z "$bounds" ]; then
+        echo "View with id $1 could not be found"
+        return
+    fi
+
+    echo "bounds = $bounds"
+
+    left=$(cat /tmp/bounds | head -1)
+    top=$(cat /tmp/bounds | head -2 | tail -1)
+    right=$(cat /tmp/bounds | head -3 | tail -1)
+    bottom=$(cat /tmp/bounds | head -4 | tail -1)
+
+    x=$(( ($left + $right) / 2))
+    y=$(( ($top + $bottom) / 2))
+    echo "view center locate at $x,$y / $bounds"
+    adb shell input tap $x $y
+}
+
+function adb_screenshot() {
+    adb shell screencap -p /sdcard/screen.png
+    adb pull /sdcard/screen.png
+    adb shell rm /sdcard/screen.png
 }

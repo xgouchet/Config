@@ -48,6 +48,7 @@
     indentHeuristic = true
     compactionHeuristic = true
     tool = meld
+    renameLimit = 1024
 [diff "image"]
     command = compare $REMOTE $LOCAL png:- | montage -geometry +4+4 $REMOTE - $LOCAL png:- | display -title "$MERGED" -
 #    command = compare $REMOTE $LOCAL png:- | display -title "$MERGED" -

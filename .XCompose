@@ -14,7 +14,6 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 
 <Multi_key> <bar> <period>                  : "⋮"
 
-
 <Multi_key> <less> <o>                      : "⟲"   U27F2       # ANTICLOCKWISE GAPPED CIRCLE ARROW
 <Multi_key> <greater> <o>                   : "⟳"   U27F3       # CLOCKWISE GAPPED CIRCLE ARROW
 
@@ -41,8 +40,11 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <numbersign> <slash> <space>    : "𝄾"
 
 <Multi_key> <p> <i>                         : "π"        U03C0                # GREEK SMALL LETTER PI
+<Multi_key> <f> <comma>                     : "ƒ"                             # MATH FUNCTION SYMBOL
 
-<Multi_key> <s> <h> <r> <u> <g>             : "¯\\_(ツ)_/¯"
+<Multi_key> <colon> <slash>                 : "¯\\_(ツ)_/¯"
+<Multi_key> <greater> <parenleft>           : "(╯°□°）╯︵ ┻━┻"
+<Multi_key> <colon> <3>                         : "ᓚᘏᗢ"
 
 <Multi_key> <a> <asterisk>                : "α"        U03B1                # GREEK SMALL LETTER ALPHA
 <Multi_key> <b> <asterisk>                : "β"        U03B2                # GREEK SMALL LETTER BETA

@@ -24,3 +24,4 @@ export EDITOR="nano"
 setxkbmap -option "nbsp:none"
 
 alias langtool-fr='java -jar /opt/LanguageTool-4.2/languagetool-commandline.jar -l fr'
+alias langtool-en='java -jar /opt/LanguageTool-4.2/languagetool-commandline.jar -l en'
