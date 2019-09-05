@@ -195,3 +195,20 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <equal> <Down>          : "₌"
 <Multi_key> <parenleft> <Down>      : "₍"
 <Multi_key> <parenright> <Down>     : "₎"
+
+# Genders
+<Multi_key> <g> <m>              : "♂"
+<Multi_key> <g> <f>              : "♀"
+<Multi_key> <g> <t>              : "⚦"
+<Multi_key> <c> <m> <m>          : "⚣"
+<Multi_key> <c> <m> <f>          : "⚤"
+<Multi_key> <c> <b> <b>          : "⚥"
+<Multi_key> <c> <p> <p>          : "⚧"
+<Multi_key> <c> <f> <f>          : "⚢"
+
+# Old letters
+<Multi_key> <g> <h>             : "ȝ"
+<Multi_key> <G> <H>             : "Ȝ"
+<Multi_key> <w> <u>             : "ƿ"
+<Multi_key> <W> <U>             : "Ƿ"
+

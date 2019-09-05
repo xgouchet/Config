@@ -94,8 +94,8 @@ function adb_show_app_info() {
     adb shell am start -a "android.settings.APPLICATION_DETAILS_SETTINGS" -d "package:$@"
 }
 
-# usage export_svg source.svg output.png sizedp
-function export_svg() {
+# usage export_svg source.svg output.png sizeDp
+function export_svg_square() {
 
     mkdir -p "drawable-ldpi"
     size=$(($3 * 3 / 4))
@@ -115,6 +115,35 @@ function export_svg() {
     mkdir -p "drawable-xxxhdpi"
     size=$(($3 * 4))
     inkscape -z -e "drawable-xxxhdpi/$2" -w $size -h $size "$1"
+}
+
+# usage export_svg source.svg output.png widthDp heightDp
+function export_svg() {
+
+    mkdir -p "drawable-ldpi"
+    width=$(($3 * 3 / 4))
+    height=$(($4 * 3 / 4))
+    inkscape -z -e "drawable-ldpi/$2" -w $width -h $height "$1"
+    mkdir -p "drawable-mdpi"
+    width=$(($3))
+    height=$(($4))
+    inkscape -z -e "drawable-mdpi/$2" -w $width -h $height "$1"
+    mkdir -p "drawable-hdpi"
+    width=$(($3 * 3 / 2))
+    height=$(($4 * 3 / 2))
+    inkscape -z -e "drawable-hdpi/$2" -w $width -h $height "$1"
+    mkdir -p "drawable-xhdpi"
+    width=$(($3 * 2))
+    height=$(($4 * 2))
+    inkscape -z -e "drawable-xhdpi/$2" -w $width -h $height "$1"
+    mkdir -p "drawable-xxhdpi"
+    width=$(($3 * 3))
+    height=$(($4 * 3))
+    inkscape -z -e "drawable-xxhdpi/$2" -w $width -h $height "$1"
+    mkdir -p "drawable-xxxhdpi"
+    width=$(($3 * 4))
+    height=$(($4 * 4))
+    inkscape -z -e "drawable-xxxhdpi/$2" -w $width -h $height "$1"
 }
 
 # usage adb_tap fullresource_id
@@ -143,7 +172,9 @@ function adb_tap() {
 }
 
 function adb_screenshot() {
-    adb shell screencap -p /sdcard/screen.png
-    adb pull /sdcard/screen.png
-    adb shell rm /sdcard/screen.png
+    name=`date +%s`
+    remote_name="/sdcard/$name.png"
+    adb shell screencap -p $remote_name
+    adb pull $remote_name
+    adb shell rm $remote_name
 }

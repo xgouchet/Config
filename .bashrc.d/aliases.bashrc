@@ -25,3 +25,5 @@ setxkbmap -option "nbsp:none"
 
 alias langtool-fr='java -jar /opt/LanguageTool-4.2/languagetool-commandline.jar -l fr'
 alias langtool-en='java -jar /opt/LanguageTool-4.2/languagetool-commandline.jar -l en'
+
+alias grammalecte='/opt/grammalecte_1.1.1/grammalecte-cli.py -f'
