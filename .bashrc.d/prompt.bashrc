@@ -51,8 +51,9 @@ pretty_git_ps1() {
         sed 's/ uι/ +/' | # upstream change count
         sed 's/ u/ /'   | # upstream info
         sed 's/#/·/'    | # pound = orphan branch
-        sed 's/(/🌱 /'   | # prefix
-        sed 's/)//'
+        sed 's/(GIT_DIR!)/🚧 🚧 🚧/' | #
+        sed 's/(/🌱 /'  | #
+        sed 's/)/ 🍃/'
 }
 
 # Prompt

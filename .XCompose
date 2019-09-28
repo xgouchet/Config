@@ -212,3 +212,11 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <w> <u>             : "ƿ"
 <Multi_key> <W> <U>             : "Ƿ"
 
+
+# Flags
+<Multi_key> <f> <r>             : "🇫🇷"
+<Multi_key> <u> <k>             : "🇬🇧"
+<Multi_key> <u> <s>             : "🇺🇸"
+<Multi_key> <v> <n>             : "🇻🇳"
+<Multi_key> <i> <n>             : "🇮🇳"
+
