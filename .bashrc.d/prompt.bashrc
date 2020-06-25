@@ -63,5 +63,4 @@ else
     PS1='(\D{%H:%M}) ${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 
-
 unset color_prompt force_color_prompt

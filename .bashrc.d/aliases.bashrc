@@ -12,18 +12,18 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -F'
+alias ll='ls -FlG --color'
+alias la='ls -FlAG --color'
 
-alias ls-flash='ls -FlaSh'
 alias weather='curl wttr.in'
 alias gw='./gradlew'
 
 export EDITOR="nano"
 setxkbmap -option "nbsp:none"
 
-alias langtool-fr='java -jar /opt/LanguageTool-4.2/languagetool-commandline.jar -l fr'
-alias langtool-en='java -jar /opt/LanguageTool-4.2/languagetool-commandline.jar -l en'
 
-alias grammalecte='/opt/grammalecte_1.1.1/grammalecte-cli.py -f'
+
+keys=$(ssh-add -l | grep -c gouchet)
+if [ "$keys" -eq "0" ]; then
+    ssh-add -k
+fi

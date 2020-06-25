@@ -5,10 +5,8 @@ export ANDROID_HOME=/opt/android/sdk
 export PATH=${PATH}:$ANDROID_SDK/tools
 export PATH=${PATH}:$ANDROID_SDK/tools/bin
 export PATH=${PATH}:$ANDROID_SDK/platform-tools
+export PATH=${PATH}:$ANDROID_SDK/emulator
 
-export SERIAL_HONOR9=7BKDU17727001808
-export SERIAL_GEAR=R3AF600DQLK
-export SERIAL_NEXUS7=0a608ee4
 
 function adb_set_serial() {
     export ANDROID_SERIAL=$1

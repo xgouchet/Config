@@ -55,7 +55,6 @@
 [difftool "meld"]
     cmd = meld --diff $LOCAL $REMOTE
 
-
 # Merge configuration
 [merge]
     tool = amt
@@ -72,10 +71,14 @@
     order = ask
 [mergetool "gen_debug"]
     report = unsolved
+[mergetool "nano"]
+    cmd = nano $MERGED
 
 
 # A list of useful aliases
 [alias]
+    # Pretty log (with graph + emojis)
+    el = !bash -c 'git lg -12 | emojify'
     # Pretty log (without graph)
     l = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s' --abbrev-commit
     # Pretty log (with graph)
@@ -107,6 +110,11 @@
 
     # Dumb commit message
     yolo = !git commit -m "\"$(curl -s http://whatthecommit.com/index.txt )\""
+    # Commit all in a wip commit
+    wip = !bash -c 'git add . && git commit -m \":construction: WIP\"'
+    # Undo a wip commit
+    unwip = !bash -c 'git uncommit && git unstage'
+
     # Commit by patch
     patch = commit --patch
     # Amend last commit
@@ -120,10 +128,10 @@
     # Create a snapshot of the current modifications
     snapshot = !git stash save "snapshot: $(date)" &&  git stash apply "stash@{0}"
     # Create a commit that fixes another one, and auto-squash it now
-    fixup = commit --fixup 
+    fixup = commit --fixup
 
     # delete all branches merged in the current branch
-    delete-merged-branches = "!git branch --no-color --merged | egrep -v '(^\\*|master|dev)' | xargs -I{} git branch -d {}"
+    delete-merged-branches = "!git branch --no-color --merged | egrep -v '(^\\*|master|dev|main)' | xargs -I{} git branch -d {}"
     dmb = "!git delete-merged-branches"
 
     # Pull the upstream branch, rebasing any local change
@@ -183,10 +191,12 @@
     # I have sexdaily... dislexia... damn
     cehcout = checkout
     cmomit = commit
+    coemend = comend
+    usntage = unstage
 
 # AutomaticMergeTool
 [amt]
-    tools = java_imports;kotlin_imports_beta;gen_simplify;gen_additions;gen_deletions;gen_woven;meld
+    tools = java_imports;gen_simplify;gen_additions;gen_deletions;gen_woven;nano
     verbose = true
     keepReport = false
 
