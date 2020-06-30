@@ -45,13 +45,13 @@
 # Diff configuration
 [diff]
     algorithm = patience
+    # better diff algorithms (require 2.11 and 2.9 respectively)
     indentHeuristic = true
     compactionHeuristic = true
     tool = meld
     renameLimit = 1024
 [diff "image"]
     command = compare $REMOTE $LOCAL png:- | montage -geometry +4+4 $REMOTE - $LOCAL png:- | display -title "$MERGED" -
-#    command = compare $REMOTE $LOCAL png:- | display -title "$MERGED" -
 [difftool "meld"]
     cmd = meld --diff $LOCAL $REMOTE
 
@@ -64,7 +64,7 @@
 [mergetool "meld"]
     cmd = meld --diff $LOCAL $MERGED $REMOTE --diff $LOCAL $BASE --diff $BASE $REMOTE
 [mergetool "amt"]
-    cmd = amt -b "$BASE" -l "$LOCAL" -r "$REMOTE" -m "$MERGED"
+    cmd = /opt/amt/amt.py -b $BASE -l $LOCAL -r $REMOTE -m $MERGED
     trustExitCode = true
 [mergetool "gen_additions"]
     whitespace =

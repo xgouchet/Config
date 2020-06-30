@@ -12,8 +12,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -FlG --color'
-alias la='ls -FlAG --color'
+alias ll='ls -FlGh --color'
+alias la='ls -FlAGh --color'
 
 alias weather='curl wttr.in'
 alias gw='./gradlew'

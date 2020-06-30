@@ -54,9 +54,12 @@ html {
 }
 
 body {
-    font-size: 20px;
-	line-height: 1.6;
-	color: rgba(0,0,0,0.87);
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-x:hidden;
+    width: 80%;
+    margin: 0 auto;
+    color: rgba(0,0,0,0.87);
     -webkit-font-smoothing: antialiased;
     padding: 0 1rem;
 }
@@ -205,6 +208,25 @@ pre {
     border-radius: 2px;
     padding: 4px;
     color: #D81E4F;
+}
+a[rel="footnote"] {
+    border-bottom: none;
+    color: #777;
+    background-color: #e3e3e3;
+    border-radius: 50%;
+    padding: 0.2em 0.5em;
+    position: relative;
+    top: -0.5em;
+    left: 0;
+    font-weight: bold;
+    font-size : 75%;
+    line-height: 0;
+}
+footnote {
+    font-style: italic;
+    margin: 1em 0 0;
+    padding: 0 0 0.5em;
+    border-top: 1px dotted #bbb;
 }
 
 /* CRITIC EXT */

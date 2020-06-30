@@ -1,0 +1,6 @@
+markdown_include.include
+markdown.extensions.extra
+markdown.extensions.codehilite
+pymdownx.critic
+pymdownx.tasklist
+markdown_checklist.extension

@@ -19,7 +19,7 @@
 ## Silently ignore problems with unknown directives in the nanorc file.
 ## Useful when your nanorc file might be read on systems with multiple
 ## versions of nano installed (e.g. your home directory is on NFS).
-set quiet
+## set quiet
 
 ## Use auto-indentation.
 # set autoindent
@@ -61,7 +61,7 @@ set constantshow
 set historylog
 
 ## Make the justify command kill whitespace at the end of lines.
-set justifytrim
+## obsolete set justifytrim
 
 ## Enable vim-style lock-files.  This is just to let a vim user know you
 ## are editing a file [s]he is trying to edit and vice versa. There are
@@ -299,8 +299,8 @@ include "~/.nano/kotlin.nanorc"
 # Standard cut / copy / paste shortcuts (defaults ^K / ? / ^U)
 unbind ^X main
 bind ^X cut main
-bind ^C copytext main
-bind ^V uncut main
+bind ^C copy main
+bind ^V paste main
 
 # Standard undo / redo shortcuts
 bind ^Y redo main
@@ -314,3 +314,12 @@ bind ^O insert main
 # Standard find / replace (defaults F6 / ^\)
 bind ^H replace main
 bind ^F whereis main
+include "~/.nano/dotenv.nanorc"
+include "~/.nano/etc-hosts.nanorc"
+include "~/.nano/gradle.nanorc"
+include "~/.nano/html.j2.nanorc"
+include "~/.nano/jade.nanorc"
+include "~/.nano/nmap.nanorc"
+include "~/.nano/pug.nanorc"
+include "~/.nano/svn.nanorc"
+include "~/.nano/verilog.nanorc"
