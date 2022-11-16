@@ -12,11 +12,18 @@
     autocrlf = input
     # handle whitespace issues
     whitespace = blank-at-eol,blank-at-eof,
+    # Define the length of the hash
+    abbrev = 10
+    # Using git-delta
+    pager = delta
 
     # attributesfile = ~/.gitattributes
 [help]
     # execute the mistyped command after 50 deciseconds
     autoCorrect = 50
+
+[commit]
+    gpgsign = true
 
 [push]
     default = upstream
@@ -74,23 +81,27 @@
 [mergetool "nano"]
     cmd = nano $MERGED
 
+# Sign configuration
+[gpg]
+    program = /usr/local/bin/gpg
 
 # A list of useful aliases
 [alias]
     # Pretty log (with graph + emojis)
-    el = !bash -c 'git lg -12 | emojify'
+    el = !bash -c 'git lg -8 ${@:1} | emojify'
     # Pretty log (without graph)
-    l = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s' --abbrev-commit
+    l = log --color --pretty=format:'%C(cyan)%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s' --abbrev-commit
     # Pretty log (with graph)
-    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen%cr (%cd) %C(bold blue)<%an>%Creset\n        %G?  %s' --abbrev-commit --date=format:'%Y-%m-%d'
+    lp = log --color --graph --pretty=format:'%C(cyan)%h%Creset -%C(yellow)%d%Creset %Cgreen%cr (%cd) %C(bold blue)<%an>%Creset\n        %C(bold red)%G?%Creset  %s' --abbrev-commit --date=format:'%Y-%m-%d'
+    lg = lp
     # Pretty log (with graph)
     ld = !git lg --simplify-by-decoration
     # log and apply a grep on log messages (or authors, ...)
-    lgrep = !bash -c 'git log --color --pretty=format:\"%Cred%h%Creset - %Cgreen(%cr) %C(bold blue)<%an>%Creset %s\" --abbrev-commit ${@:2} | grep -i $1' -
+    lgrep = !bash -c 'git log --color --pretty=format:\"%Ccyan%h%Creset - %Cgreen(%cr) %C(bold blue)<%an>%Creset %s\" --abbrev-commit ${@:2} | grep -i $1' -
     # Short status
     st = status --short --branch
     # Show a (short) commit info without the diff
-    peek = show --quiet  --format='%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s'
+    peek = show --quiet  --format='%Ccyan%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s'
     # Show the first commit
     first = "!git l --date-order --reverse | head -2"
     # Show the diff staged for commit
@@ -101,12 +112,14 @@
     last-year = !git mine --all --after "01/01/$(date --date='1 year ago' +%Y)" --before "01/01/$(date +%Y)" --no-merges
     # Show all commits from past week
     weekly = !git mine --all --since 1.week --date=short --no-merges
-    # Daily standup 
+    # Daily standup
     standup = !git mine --all --since yesterday --no-merges
     # What's the Focus ?!
     wtf = "!git status --short --branch; echo '\nThe last 3 commits were :'; git l -5 --graph"
     # Find all jira tasks merged
-    jira = !bash -c 'git log --pretty=format:\"%s\" ${@:2} | grep -o \"$1-[0-9]*\" ' -
+    jira = !bash -c 'git log --pretty=format:\"%s\" ${@:2} | grep -o \"$1-[0-9]*\" | sort -u | more' -
+    # Pull request stats
+    pr = "diff --shortstat master HEAD"
 
     # Dumb commit message
     yolo = !git commit -m "\"$(curl -s http://whatthecommit.com/index.txt )\""
@@ -143,6 +156,9 @@
     # Push force with lease
     please = push --force-with-lease
 
+    # Quick Fix for CI
+    quickfix = "!git add . && git comend && git please"
+
     # Init a folder with an empty initial commit
     it = !git init && git commit --allow-empty
     # Add a file to the gitignore file
@@ -162,12 +178,12 @@
 
     # shortcuts for custom merges
     mergemeld = mergetool --tool=meld
+    mergekdiff = mergetool --tool=kdiff3
     mergeamt = mergetool --tool=amt
 
     # To err is human, but a real disaster needs a git client
     unadd = rm --cached
-    unstage = reset --mixed
-    unchange = reset --hard -- .
+    unstage = reset --
     uncommit = reset --soft HEAD^
     rollback = reset --hard HEAD^
 
@@ -193,6 +209,7 @@
     cmomit = commit
     coemend = comend
     usntage = unstage
+    udpate = update
 
 # AutomaticMergeTool
 [amt]
@@ -200,3 +217,9 @@
     verbose = true
     keepReport = false
 
+# git-delta
+[delta]
+    plus-color = "#012800"
+    minus-color = "#340001"
+    features = line-numbers decorations
+    syntax-theme = Dracula

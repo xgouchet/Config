@@ -21,6 +21,8 @@ alias gw='./gradlew'
 export EDITOR="nano"
 setxkbmap -option "nbsp:none"
 
+alias python="/usr/local/bin/python3"
+alias pip="/usr/local/bin/pip3"
 
 
 keys=$(ssh-add -l | grep -c gouchet)
