@@ -1,8 +1,8 @@
 # Basic
 [user]
-    name = Xavier Gouchet
-    email = xavier.gouchet@gmail.com
-    signingkey = 35B201543D41A27E2DBA7C6E7650A5084AB64CD6
+    name = Xavier F. Gouchet
+    email = github@xgouchet.fr
+    signingkey = 0203188BF88DFEE0C984F71E6467AF1FDE494EE9
 
 # Core behavior
 [core]
@@ -16,8 +16,13 @@
     abbrev = 10
     # Using git-delta
     pager = delta
+	hooksPath = /usr/local/dd/global_hooks
 
     # attributesfile = ~/.gitattributes
+
+[init]
+    defaultBranch = main
+
 [help]
     # execute the mistyped command after 50 deciseconds
     autoCorrect = 50
@@ -83,12 +88,12 @@
 
 # Sign configuration
 [gpg]
-    program = /usr/local/bin/gpg
+    program = /opt/homebrew/bin/gpg
 
 # A list of useful aliases
 [alias]
-    # Pretty log (with graph + emojis)
-    el = !bash -c 'git lg -8 ${@:1} | emojify'
+    # Pretty log (with graph)
+    el = !bash -c 'git lg -7 ${@:1}'
     # Pretty log (without graph)
     l = log --color --pretty=format:'%C(cyan)%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s' --abbrev-commit
     # Pretty log (with graph)
@@ -107,15 +112,18 @@
     # Show the diff staged for commit
     staged = diff --staged
     # Log only my commits
-    mine = !git l --author="$(git config user.email)"
+    mine = !git lg --author="$(git config user.email)"
     # Show all the commits from last year (usefull for annual performance review)
     last-year = !git mine --all --after "01/01/$(date --date='1 year ago' +%Y)" --before "01/01/$(date +%Y)" --no-merges
     # Show all commits from past week
-    weekly = !git mine --all --since 1.week --date=short --no-merges
+    weekly = mine --all --since 1.week --date=short --no-merges
     # Daily standup
-    standup = !git mine --all --since yesterday --no-merges
+    standup = mine --all --since yesterday --no-merges
     # What's the Focus ?!
     wtf = "!git status --short --branch; echo '\nThe last 3 commits were :'; git l -5 --graph"
+    # TL;DR;
+    tldr = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
+
     # Find all jira tasks merged
     jira = !bash -c 'git log --pretty=format:\"%s\" ${@:2} | grep -o \"$1-[0-9]*\" | sort -u | more' -
     # Pull request stats
@@ -127,6 +135,9 @@
     wip = !bash -c 'git add . && git commit -m \":construction: WIP\"'
     # Undo a wip commit
     unwip = !bash -c 'git uncommit && git unstage'
+    # Creates a checkpoint
+    checkpoint = !bash -c 'git add -A && git commit -m \":construction: Checkpoint `date`\"'
+
 
     # Commit by patch
     patch = commit --patch
@@ -155,6 +166,14 @@
     art-49-3 = push --force
     # Push force with lease
     please = push --force-with-lease
+
+    # Create a new branch and switch to it (like checkout -b)
+    bns = "!git branch $1 && echo \"Wrote branch $1\" &&  git switch $1 #"
+
+    # Get the "default" branch (e.g.: master, main, develop, prod, …)
+    default-branch="!basename $(git rev-parse --abbrev-ref origin/HEAD)"
+    # Switch to the "default" branch
+    switch-default="!git switch $(git default-branch)"
 
     # Quick Fix for CI
     quickfix = "!git add . && git comend && git please"
@@ -223,3 +242,6 @@
     minus-color = "#340001"
     features = line-numbers decorations
     syntax-theme = Dracula
+
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_ssh_signers
