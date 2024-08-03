@@ -69,7 +69,7 @@
 
 # Merge configuration
 [merge]
-    tool = amt
+    tool = meld
     conflictstyle = diff3
 [mergetool]
     keepBackup = false
@@ -232,7 +232,7 @@
 
 # AutomaticMergeTool
 [amt]
-    tools = java_imports;gen_simplify;gen_additions;gen_deletions;gen_woven;nano
+    tools = java_imports;gen_simplify;gen_additions;gen_deletions;gen_woven;meld
     verbose = true
     keepReport = false
 

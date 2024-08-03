@@ -1,6 +1,6 @@
 # Android path variables
-export ANDROID_SDK=/opt/android/sdk
-export ANDROID_HOME=/opt/android/sdk
+export ANDROID_SDK=/home/xgouchet/Android/Sdk
+export ANDROID_HOME=/home/xgouchet/Android/Sdk
 
 export PATH=${PATH}:$ANDROID_SDK/tools
 export PATH=${PATH}:$ANDROID_SDK/tools/bin

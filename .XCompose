@@ -104,6 +104,31 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <Y> <asterisk>                : "Η"        U0397                # GREEK CAPITAL LETTER ΕΤΑ
 <Multi_key> <Z> <asterisk>                : "Ζ"        U0396                # GREEK CAPITAL LETTER ZETA
 
+# Runes
+<Multi_key> <colon> <a> :	"ᚨ"
+<Multi_key> <colon> <b> :	"ᛒ"
+<Multi_key> <colon> <d> :	"ᛞ"
+<Multi_key> <colon> <e> : 	"ᛖ"
+<Multi_key> <colon> <f> : 	"ᚠ"
+<Multi_key> <colon> <g> :	"ᚷ"
+<Multi_key> <colon> <h> :	"ᚺ"
+<Multi_key> <colon> <i> :	"ᛁ"
+<Multi_key> <colon> <j> :	"ᛃ"
+<Multi_key> <colon> <k> :	"ᚲ"
+<Multi_key> <colon> <l> :	"ᛚ"
+<Multi_key> <colon> <m> :	"ᛗ"
+<Multi_key> <colon> <n> :	"ᚾ"
+<Multi_key> <colon> <o> :	"ᛟ"
+<Multi_key> <colon> <p> :	"ᛈ"
+<Multi_key> <colon> <r> :	"ᚱ"
+<Multi_key> <colon> <s> :	"ᛊ"
+<Multi_key> <colon> <t> :	"ᛏ"
+<Multi_key> <colon> <u> :	"ᚢ"
+<Multi_key> <colon> <w> :	"ᚹ"
+<Multi_key> <colon> <z> :	"ᛉ"
+<Multi_key> <colon> <t> <h> :	"ᚦ" 
+
+
 # Superscript
 <Multi_key> <A> <Up>         : "ᴬ"
 <Multi_key> <B> <Up>         : "ᴮ"
@@ -217,6 +242,9 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <w> <u>             : "ƿ"
 <Multi_key> <W> <U>             : "Ƿ"
 
+
+# Lol
+<Multi_key> <u> <r> <s> <s>            : "☭"            
 
 # Flags
 <Multi_key> <f> <r>             : "🇫🇷"

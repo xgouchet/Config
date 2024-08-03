@@ -27,6 +27,8 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+source /usr/lib/git-core/git-sh-prompt
+
 # Configure Git PS1
 GIT_PS1_DESCRIBE_STYLE='describe'
 GIT_PS1_SHOWDIRTYSTATE=true
@@ -40,20 +42,20 @@ GIT_PS1_STATESEPARATOR=' '
 # pretty_git_ps1=`__git_ps1`
 pretty_git_ps1() {
     __git_ps1 |
-        sed 's/</∇/'    | # upstream ahead
-        sed 's/>/∆/'    | # upstream behind
-        sed 's/[$]/Σ/'  | # sigma = stash available
-        sed 's/*/δ/'    | # delta = dirty files
-        sed 's/%/υ/'    | # upsilon = untracked files
-        sed 's/+/ι/'    | # iota = indexed files
-        sed 's/#/·/'    | # pound = orphan branch
-        sed 's/=/✓/'    | # upstream identical to local
-        sed 's/ uι/ +/' | # upstream change count
-        sed 's/ u/ /'   | # upstream info
-        sed 's/#/·/'    | # pound = orphan branch
-        sed 's/(GIT_DIR!)/🚧 🚧 🚧/' | #
-        sed 's/(/🌱 /'  | #
-        sed 's/)/ 🍃/'
+        sed 's/<>/⛔ ⤓↥ ⛔/'  | # upstream ahead and behind
+        sed 's/</⤓/'        | # upstream ahead
+        sed 's/>/↥/'        | # upstream behind
+        sed 's/ u/ 🗃️ /'       | # upstream info
+        sed 's/|u/ 🗃️ /'       | # upstream info
+        sed 's/*+%/📚/'    | # mix of dirty, staged and untracked files
+        sed 's/+%/📗📘/'        | # mix of dirty, staged and untracked files
+        sed 's/*/📕/'        | # unstaged dirty files
+        sed 's/+ /📗 /'        | # indexed files
+        sed 's/%/📘/'      | # untracked files
+        sed 's/[$]/🗂️/'    | # stash available
+        sed 's/=/ ✅/'      | # upstream tree identical to local
+        sed 's/#/ ·/'       | # orphan branch
+        sed 's/GIT_DIR!/⚡ .git ⚡/' # inside .gitDir
 }
 
 # Prompt
