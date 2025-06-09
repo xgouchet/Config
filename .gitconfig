@@ -1,10 +1,17 @@
-# Basic
+
+################################
+#             Basic            #
+################################
+
 [user]
     name = Xavier F. Gouchet
     email = github@xgouchet.fr
-    signingkey = 0203188BF88DFEE0C984F71E6467AF1FDE494EE9
+    # signingkey = 1234567890abcdef
 
-# Core behavior
+################################
+#         Core behavior        #
+################################
+
 [core]
     editor = nano -r 72 --softwrap
     # convert crlf on commit, set the default end of line as lf
@@ -16,15 +23,15 @@
     abbrev = 10
     # Using git-delta
     pager = delta
-	hooksPath = /usr/local/dd/global_hooks
-
+    # Keep a cache on untracked files to make git status faster
+    untrackedCache=true
     # attributesfile = ~/.gitattributes
 
 [init]
     defaultBranch = main
 
 [help]
-    # execute the mistyped command after 50 deciseconds
+    # execute the mistyped command after 50 deciseconds=5 seconds
     autoCorrect = 50
 
 [commit]
@@ -32,29 +39,45 @@
 
 [push]
     default = upstream
+
 [fetch]
     prune = true
+
 [rebase]
     autosquash = true
 
-# Display
+[branch]
+    sort = -committerdate
+
+[tag]
+    sort = version:refname
+
+################################
+#            Display           #
+################################
+
 [color]
     ui = always
     diff = always
+
 [color "branch"]
     current = green reverse
     local = green
     remote = yellow
+
 [color "status"]
     added = green
     changed = yellow
     untracked = red
     branch = blue
+
 [status]
     showUntrackedFiles = all
 
+################################
+#      Diff configuration      #
+################################
 
-# Diff configuration
 [diff]
     algorithm = patience
     # better diff algorithms (require 2.11 and 2.9 respectively)
@@ -62,38 +85,55 @@
     compactionHeuristic = true
     tool = meld
     renameLimit = 1024
+
 [diff "image"]
     command = compare $REMOTE $LOCAL png:- | montage -geometry +4+4 $REMOTE - $LOCAL png:- | display -title "$MERGED" -
+
 [difftool "meld"]
     cmd = meld --diff $LOCAL $REMOTE
 
+################################
 # Merge configuration
+################################
+
 [merge]
     tool = meld
     conflictstyle = diff3
+
 [mergetool]
     keepBackup = false
+
 [mergetool "meld"]
     cmd = meld --diff $LOCAL $MERGED $REMOTE --diff $LOCAL $BASE --diff $BASE $REMOTE
+
 [mergetool "amt"]
     cmd = /opt/amt/amt.py -b $BASE -l $LOCAL -r $REMOTE -m $MERGED
     trustExitCode = true
+
 [mergetool "gen_additions"]
     whitespace =
     order = ask
+
 [mergetool "gen_debug"]
     report = unsolved
+
 [mergetool "nano"]
     cmd = nano $MERGED
 
+################################
 # Sign configuration
+################################
+
 [gpg]
     program = /opt/homebrew/bin/gpg
 
-# A list of useful aliases
+################################
+#          Aliases             #
+################################
+
 [alias]
     # Pretty log (with graph)
-    el = !bash -c 'git lg -7 ${@:1}'
+    el = !bash -c 'git lg -8 ${@:1}'
     # Pretty log (without graph)
     l = log --color --pretty=format:'%C(cyan)%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset\n        %G?  %s' --abbrev-commit
     # Pretty log (with graph)
@@ -171,9 +211,13 @@
     bns = "!git branch $1 && echo \"Wrote branch $1\" &&  git switch $1 #"
 
     # Get the "default" branch (e.g.: master, main, develop, prod, …)
-    default-branch="!basename $(git rev-parse --abbrev-ref origin/HEAD)"
+    default-branch = "!basename $(git rev-parse --abbrev-ref origin/HEAD)"
     # Switch to the "default" branch
-    switch-default="!git switch $(git default-branch)"
+    switch-default = "!git switch $(git default-branch)"
+    swdef = "!git switch $(git default-branch)"
+    # Switch using a ui
+    switch-ui = "!git branch -v --no-color --sort=-committerdate | fzf --layout=reverse-list --bind \"enter:execute(git checkout {1})+accept-non-empty\""
+    swui = "!git branch -v --no-color --sort=refname | fzf --layout=reverse-list --bind \"enter:execute(git checkout {1})+accept-non-empty\""
 
     # Quick Fix for CI
     quickfix = "!git add . && git comend && git please"
@@ -244,4 +288,5 @@
     syntax-theme = Dracula
 
 [gpg "ssh"]
-	allowedSignersFile = ~/.config/git/allowed_ssh_signers
+	#allowedSignersFile = ~/.config/git/allowed_ssh_signers
+	#allowedSignersFile = /Users/xavier.gouchet/.config/git/allowed_ssh_signers
